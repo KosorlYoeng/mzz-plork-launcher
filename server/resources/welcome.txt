@@ -1,0 +1,4 @@
+Sample resource served by the local MzzPlork Server test environment.
+This is a test fixture, not game content -- it exists to exercise the
+resource manifest / download / verification pipeline end-to-end without
+depending on GTA V.

@@ -1,0 +1,22 @@
+# Dependencies -- reproducible via `npm install` from the committed
+# package.json/package-lock.json; never worth tracking (this is what let
+# Electron's own 177MB binary get committed before -- see docs/decisions.md).
+node_modules/
+
+# Build outputs -- all regenerable from source, none of it hand-authored.
+bootstrapper/dist-renderer/
+bootstrapper/dist-package/
+runtime/build/
+runtime/tests/build/
+runtime/tests/*.exe
+*.obj
+
+# The packaged bootstrapper executable is large (~70MB) and changes on
+# every repackage -- rebuild it locally with `npm run package` in
+# bootstrapper/ rather than committing it. dist/runtime/MzzPlorkClient.exe
+# stays tracked: it's small (~500KB) and is the project's actual
+# deliverable build output, not an intermediate artifact.
+dist/MzzPlork.exe
+
+# Runtime logs -- change on every run, not source.
+server/logs/

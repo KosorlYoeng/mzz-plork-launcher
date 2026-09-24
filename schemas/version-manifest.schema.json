@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://mzzplork/schemas/version-manifest.schema.json",
+  "title": "MzzPlork Version Manifest",
+  "description": "Shape of both the remote update manifest and the local version.json written into MzzPlork Application Data. `version` is the overall manifest/release version; each component (runtime, resources, ...) carries its own version independently so they can update on different cadences. Every file entry is individually versioned and hashed so the update system can diff and redownload at file granularity, not just per component.",
+  "type": "object",
+  "required": ["version", "runtime", "resources"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Overall manifest/release version, informational -- update decisions are driven by component and file versions/hashes, not this field."
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "runtime": { "$ref": "#/definitions/component" },
+    "resources": { "$ref": "#/definitions/component" }
+  },
+  "additionalProperties": { "$ref": "#/definitions/component" },
+  "definitions": {
+    "component": {
+      "type": "object",
+      "required": ["version", "files"],
+      "properties": {
+        "version": { "type": "string" },
+        "files": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/file" }
+        }
+      }
+    },
+    "file": {
+      "type": "object",
+      "required": ["path", "size", "hash", "version"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Relative path, both for local placement under the component's target directory and, by default, for the remote download URL (joined with the configured download base URL)."
+        },
+        "size": { "type": "integer", "minimum": 0 },
+        "hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "sha256 of the file contents, hex-encoded. Authoritative for change detection and integrity verification."
+        },
+        "version": {
+          "type": "string",
+          "description": "Descriptive per-file version tag. Not authoritative for diffing -- hash+size decide whether a file changed."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Optional absolute download URL overriding the default `${downloadBaseUrl}/<component>/<path>` construction, e.g. for CDN-hosted files."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "updateServerUrl": "https://updates.mzzplork.example/manifest.json",
+  "downloadBaseUrl": "https://updates.mzzplork.example/files"
+}

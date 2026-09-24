@@ -1,0 +1,8 @@
+{
+  "tcpPort": 7777,
+  "httpPort": 7778,
+  "protocolVersion": "1.0",
+  "resourcesDir": "resources",
+  "heartbeatIntervalMs": 15000,
+  "heartbeatTimeoutMs": 45000
+}

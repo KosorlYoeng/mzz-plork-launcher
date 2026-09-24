@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://mzzplork/schemas/app-config.schema.json",
+  "title": "MzzPlork Bootstrapper Config",
+  "description": "Config written to MzzPlork Application Data\\config\\config.json. Not the same as version.json (that is state; this is settings).",
+  "type": "object",
+  "properties": {
+    "updateServerUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "Placeholder until a real update server exists. See docs/FLOWS.md Update flow."
+    },
+    "lastKnownGtaInstallPath": {
+      "type": ["string", "null"],
+      "default": null
+    },
+    "windowBounds": {
+      "type": "object",
+      "properties": {
+        "width": { "type": "integer", "minimum": 200 },
+        "height": { "type": "integer", "minimum": 200 }
+      }
+    }
+  },
+  "additionalProperties": false
+}

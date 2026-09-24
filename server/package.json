@@ -1,0 +1,12 @@
+{
+  "name": "mzzplork-server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MzzPlork multiplayer server -- client connections, auth/session, resource manifest/delivery, events. Independent of GTA V.",
+  "main": "src/main.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node --test \"tests/**/*.test.js\""
+  }
+}
